@@ -1,2 +1,2 @@
 # bedrock-pra-client-demo
-Demo client application for the Amazon Bedrock Product Review Agent sample app
+Runs the [client appication](https://github.com/aws-samples/amazon-bedrock-samples/blob/main/agents-and-function-calling/bedrock-agents/use-case-examples/product-review-agent/main.py) for [Amazon Bedrock Product Review Agent](https://github.com/aws-samples/amazon-bedrock-samples/blob/main/agents-and-function-calling/bedrock-agents/use-case-examples/product-review-agent/README.md) sample application in a container. 
