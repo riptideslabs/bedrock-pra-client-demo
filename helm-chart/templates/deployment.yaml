@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+
+  labels:
+    app: {{ .Values.clientApp.labels.app }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/version: {{ .Chart.AppVersion }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.clientApp.replicas | default 1 }}
+  selector:
+    matchLabels:
+      app: {{ .Values.clientApp.labels.app }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.clientApp.labels.app }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: streamlit-client-app
+          image: {{ .Values.clientApp.container.image | default "ghcr.io/riptideslabs/bedrock-pra-client-demo:latest" }}
+          imagePullPolicy: {{ .Values.clientApp.container.imagePullPolicy | default "IfNotPresent" }}
+          ports:
+            - containerPort: {{ .Values.clientApp.container.port | default 8501 }}
+          env:
+            - name: AGENT_ID
+              value: {{ .Values.clientApp.container.env.AGENT_ID }}
+            - name: AGENT_ALIAS
+              value: {{ .Values.clientApp.container.env.AGENT_ALIAS }}
+            - name: AWS_ACCESS_KEY_ID
+              value: {{ .Values.clientApp.container.env.AWS_ACCESS_KEY_ID }}
+            - name: AWS_SECRET_ACCESS_KEY
+              value: {{ .Values.clientApp.container.env.AWS_SECRET_ACCESS_KEY }}
+            - name: AWS_CA_BUNDLE
+              value: {{ .Values.clientApp.container.env.AWS_CA_BUNDLE }}
+            - name: AWS_DEFAULT_REGION
+              value: {{ .Values.clientApp.container.env.AWS_DEFAULT_REGION }}
+          resources:
+            limits:
+              cpu: 1
+              memory: 2Gi
+            requests:
+              cpu: 100m
+              memory: 745Mi
+          livenessProbe:
+            httpGet:
+              path: /_stcore/health
+              port: {{ .Values.clientApp.container.port }}
+              scheme: HTTP
+            timeoutSeconds: 1
+          readinessProbe:
+            httpGet:
+              path: /_stcore/health
+              port: {{ .Values.clientApp.container.port }}
+              scheme: HTTP
+            timeoutSeconds: 1

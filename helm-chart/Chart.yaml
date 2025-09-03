@@ -1,0 +1,13 @@
+name: bedrock-pra-client-demo
+version: 0.1.0
+description: A Helm chart for deploying Bedrock Product Review Agent and supporting resources
+type: application
+keywords:
+  - bedrock
+  - product-review
+  - agent
+  - streamlit
+home: https://github.com/riptideslabs/bedrock-pra-client-demo
+maintainers:
+  - name: Riptides Labs
+    url: https://riptides.io

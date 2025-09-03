@@ -1,0 +1,4 @@
+boto3>=1.34.118
+botocore
+requests-aws4auth
+streamlit
