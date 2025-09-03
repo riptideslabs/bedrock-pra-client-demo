@@ -49,12 +49,12 @@ spec:
           livenessProbe:
             httpGet:
               path: /_stcore/health
-              port: {{ .Values.clientApp.container.port }}
+              port: {{ .Values.clientApp.container.port | default 8501 }}
               scheme: HTTP
             timeoutSeconds: 1
           readinessProbe:
             httpGet:
               path: /_stcore/health
-              port: {{ .Values.clientApp.container.port }}
+              port: {{ .Values.clientApp.container.port | default 8501}}
               scheme: HTTP
             timeoutSeconds: 1
