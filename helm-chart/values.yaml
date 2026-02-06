@@ -6,5 +6,6 @@ clientApp:
       AWS_ACCESS_KEY_ID: your-aws-access-key-id
       AWS_SECRET_ACCESS_KEY: your-aws-secret-access-key
       AWS_DEFAULT_REGION: your-aws-region
+      AWS_CA_BUNDLE: /sys/module/riptides/certs/ca-certificates.crt
   labels:
     app: streamlit-client-app
